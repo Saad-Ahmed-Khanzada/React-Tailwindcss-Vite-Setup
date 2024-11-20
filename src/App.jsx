@@ -29,15 +29,15 @@ function App() {
 
     const prevSlide = ()=>{
       setCurrentSlide((prev)=>(prev===0 ? slides.length - 1 : prev-1))
-    }
-
-    const nextSlide = () => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
     };
+
+    const nextSlide = ()=>{
+      setCurrentSlide((prev)=>(prev ===slides.length - 1 ? 0 : prev + 1));
+    }
 
 
   return (
-    <div className="bg-slate-300 h-screen ">
+    <div className="bg-slate-300 min-h-screen ">
       <div className="bg-gradient-to-r from-purple-500 to-blue-400 flex justify-between items-center p-4">
      <h1 className="text-white  font-bold text-xl"> Get the NEW 2024 Google Ads Benchmarks for your industry </h1>
       <button className='bg-white text-blue-700 font-bold p-2 rounded-2xl bg-opacity-85'>
@@ -59,6 +59,56 @@ function App() {
           </h1>
       </div>
 
+      <div className="flex flex-col items-center mt-10">
+        <div className="relative max-w-screen-lg w-full  overflow-hidden rounded-lg shadow-lg">
+          {/* Slides */}
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${currentSlide * 100}%)`,
+            }}
+          >
+            {slides.map((slide) => (
+              <div
+                key={slide.id}
+                className={`min-w-full h-full flex flex-col justify-center items-center text-white ${slide.bgColor} p-10`}
+              >
+                <h1 className="text-2xl font-bold">{slide.title}</h1>
+                <p className="text-lg mt-2">{slide.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Buttons */}
+          <button
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 text-white p-3 rounded-full shadow-md hover:bg-gray-900"
+            onClick={prevSlide}
+          >
+            ◀
+          </button>
+          <button
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 text-white p-3 rounded-full shadow-md hover:bg-gray-900"
+            onClick={nextSlide}
+          >
+            ▶
+          </button>
+        </div>
+
+        {/* Indicators */}
+        <div className="flex mt-4 space-x-10">
+          {slides.map((slide, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-4 h-4 rounded-full transition-all ${
+                currentSlide === index
+                  ? "bg-blue-600 scale-125"
+                  : "bg-gray-400"
+              }`}
+            ></button>
+          ))}
+        </div>
+      </div>
       
   </div>
   )
