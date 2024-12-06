@@ -19,7 +19,7 @@ function Counter() {
         </button>
         <button
           onClick={() => dispatch(decrement())}
-          className="bg-red-500 text-white px-4 py-2 rounded"
+          className="bg-red-400 text-white px-4 py-2 rounded"
         >
           Decrement
         </button>
